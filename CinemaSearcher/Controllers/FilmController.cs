@@ -11,31 +11,31 @@ using System.Threading.Tasks;
 
 namespace CinemaSearcher.Controllers
 {
-    [Route("api/ticket")]
-    public class TicketController : Controller
+    [Route("api/film")]
+    public class FilmController : Controller
     {
-        private readonly ITicketService _ticketService;
+        private readonly IFilmService _filmService;
         private readonly IMapper _mapper;
 
-        public TicketController(ITicketService ticketService, IMapper mapper)
+        public FilmController(IFilmService filmService, IMapper mapper)
         {
-            _ticketService = ticketService;
+            _filmService = filmService;
             _mapper = mapper;
         }
 
         /// <summary>
         /// Get specific ticket.
         /// </summary>
-        /// <param name="ticketId">Ticket Id.</param>
+        /// <param name="filmId">Ticket Id.</param>
         /// <returns>Place by id.</returns>
         /// <response code="404">If ticket is not found.</response>
         [HttpGet]
-        [Route("{ticketId}")]
+        [Route("{filmId}")]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> Get(Guid ticketId)
+        public async Task<IActionResult> Get(Guid filmId)
         {
-            var ticket = await _ticketService.GetAsync(ticketId);
+            var ticket = await _filmService.GetAsync(filmId);
 
             return Ok(ticket);
         }
@@ -50,9 +50,9 @@ namespace CinemaSearcher.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetAll()
         {
-            var tickets = await _ticketService.GetAllAsync();
+            var films = await _filmService.GetAllAsync();
 
-            return Ok((tickets));
+            return Ok((films));
         }
 
         /// <summary>
@@ -61,70 +61,72 @@ namespace CinemaSearcher.Controllers
         /// <returns>All tickets by search query.</returns>
         /// <response code="404">If tickets are not found.</response>
         [HttpGet]
-        [Route("/search")]
+        [Route("/api/film/search")]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetAllBySearchQuery([FromQuery] TicketSearchModel ticketSearchModel)
+        public async Task<IActionResult> GetAllBySearchQuery([FromQuery] FilmSearchModel filmSearchModel)
         {
-            TicketSearchBuilder ticketSearchBuilder = new TicketSearchBuilder(ticketSearchModel);
-            var tickets = await _ticketService.Find(ticketSearchBuilder.Build());
+            FilmSearchBuilder filmSearchBuilder = new FilmSearchBuilder(filmSearchModel);
+            var tickets = await _filmService.Find(filmSearchBuilder.Build());
 
             return Ok(tickets);
         }
 
         /// <summary>
-        /// Add new ticket.
+        /// Add new film.
         /// </summary>
-        /// <param name="ticket">Ticket.</param>
-        /// <returns>A newly created ticket.</returns>
-        /// <response code="200">Returns the newly created ticket.</response>
+        /// <param name="filmModel">Film.</param>
+        /// <returns>A newly created film.</returns>
+        /// <response code="200">Returns the newly created film.</response>
         /// <response code="400">If request data is null.</response>
         [HttpPost]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> Post(TicketModel ticketModel)
+        public async Task<IActionResult> Post(FilmModel filmModel)
         {
-            var ticket = _mapper.Map<Ticket>(ticketModel);
-            var createdTicket = await _ticketService.AddAsync(ticket);
+            var film = _mapper.Map<Film>(filmModel);
+            var createdFilm = await _filmService.AddAsync(film);
 
-            return Ok(createdTicket);
+            return Ok(createdFilm);
         }
 
         /// <summary>
-        /// Update ticket.
+        /// Update film.
         /// </summary>
-        /// <param name="ticketId">Ticket Id.</param>
-        /// <returns>Updated ticket.</returns>
-        /// <response code="200">Returns the updated ticket.</response>
+        /// <param name="filmId">Film Id.</param>
+        /// <returns>Updated film.</returns>
+        /// <response code="200">Returns the updated film.</response>
         /// <response code="400">If request data is null.</response>
-        /// <response code="404">If ticket is not found.</response>
+        /// <response code="404">If film is not found.</response>
         [HttpPut]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [Route("{ticketId}")]
-        public async Task<IActionResult> Put(Guid ticketId, TicketModel ticketModel)
+        [Route("{filmId}")]
+        public async Task<IActionResult> Put(Guid filmId, FilmModel filmModel)
         {
-            var ticket = await _ticketService.GetAsync(ticketId);
-            _mapper.Map(ticketModel, ticket);
-            var updatedPlace = await _ticketService.UpdateAsync(ticketId, ticket);
-            return Ok(updatedPlace);
+            var film = await _filmService.GetAsync(filmId);
+            _mapper.Map(filmModel, film);
+            var updatedFilm = await _filmService.UpdateAsync(filmId, film);
+
+            return Ok(updatedFilm);
         }
 
         /// <summary>
-        /// Delete ticket.
+        /// Delete film.
         /// </summary>
-        /// <param name="ticketId">Ticket Id.</param>
+        /// <param name="filmId">Film Id.</param>
         /// <returns></returns>
         /// <response code="204">Returns no content status code.</response>
-        /// <response code="404">If ticket is not found.</response>
+        /// <response code="404">If film is not found.</response>
         [HttpDelete]
         [ProducesResponseType(typeof(IActionResult), 200)]
         [ProducesResponseType(404)]
-        [Route("{ticketId}")]
-        public async Task<IActionResult> Delete(Guid ticketId)
+        [Route("{filmId}")]
+        public async Task<IActionResult> Delete(Guid filmId)
         {
-            await _ticketService.RemoveAsync(ticketId);
+            await _filmService.RemoveAsync(filmId);
+
             return NoContent();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace CinemaSearcher.Business.Interfaces
 {
-    public interface ITicketService : IGenericService<Ticket>
+    public interface IFilmService : IGenericService<Film>
     {
     }
 }

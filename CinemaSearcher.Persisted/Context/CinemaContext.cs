@@ -6,7 +6,7 @@ namespace CinemaSearcher.Persisted.Context
 {
     public sealed class CinemaContext : DbContext
     {
-        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<Film> Films { get; set; }
 
         public CinemaContext(DbContextOptions options) : base(options)
         {
@@ -16,7 +16,7 @@ namespace CinemaSearcher.Persisted.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new TicketConfiguration());
+            modelBuilder.ApplyConfiguration(new FilmConfiguration());
         }
     }
 }

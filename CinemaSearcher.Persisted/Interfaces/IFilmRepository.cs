@@ -2,7 +2,7 @@
 
 namespace CinemaSearcher.Persisted.Interfaces
 {
-    public interface ITicketRepository : IGenericRepository<Ticket>
+    public interface IFilmRepository : IGenericRepository<Film>
     {
     }
 }

@@ -38,7 +38,7 @@ namespace CinemaSearcher
                 });
             });
 
-            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IFilmService, FilmService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

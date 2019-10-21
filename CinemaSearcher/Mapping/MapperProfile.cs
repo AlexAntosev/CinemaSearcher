@@ -8,7 +8,7 @@ namespace CinemaSearcher.Mapping
     {
         public MapperProfile()
         {
-            CreateMap<TicketModel, Ticket>();
+            CreateMap<FilmModel, Film>();
         }
     }
 }

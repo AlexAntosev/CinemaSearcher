@@ -4,7 +4,7 @@ namespace CinemaSearcher.Persisted.Interfaces
 {
     public interface IUnitOfWork
     {
-        ITicketRepository TicketRepository { get; }
+        IFilmRepository FilmRepository { get; }
 
         Task CommitAsync();
     }

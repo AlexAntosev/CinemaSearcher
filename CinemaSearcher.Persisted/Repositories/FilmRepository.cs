@@ -4,9 +4,9 @@ using CinemaSearcher.Persisted.Interfaces;
 
 namespace CinemaSearcher.Persisted.Repositories
 {
-    public class TicketRepository : GenericRepository<Ticket>, ITicketRepository
+    public class FilmRepository : GenericRepository<Film>, IFilmRepository
     {
-        public TicketRepository(CinemaContext context) : base(context)
+        public FilmRepository(CinemaContext context) : base(context)
         {
 
         }

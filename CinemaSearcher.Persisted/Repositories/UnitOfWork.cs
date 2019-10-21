@@ -8,14 +8,14 @@ namespace CinemaSearcher.Persisted.Repositories
     {
         private readonly CinemaContext _context;
 
-        private ITicketRepository _ticketRepository;
+        private IFilmRepository _filmRepository;
 
         public UnitOfWork(CinemaContext context)
         {
             _context = context;
         }
 
-        public ITicketRepository TicketRepository => _ticketRepository ?? (_ticketRepository = new TicketRepository(_context));
+        public IFilmRepository FilmRepository => _filmRepository ?? (_filmRepository = new FilmRepository(_context));
 
         public async Task CommitAsync()
         {

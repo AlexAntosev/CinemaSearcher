@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CinemaSearcher.Persisted.Configurations
 {
-    public class TicketConfiguration : IEntityTypeConfiguration<Ticket>
+    public class FilmConfiguration : IEntityTypeConfiguration<Film>
     {
-        public void Configure(EntityTypeBuilder<Ticket> builder)
+        public void Configure(EntityTypeBuilder<Film> builder)
         {
             builder.HasKey(_ => _.Id);
             builder.HasQueryFilter(_ => !_.IsDeleted);
