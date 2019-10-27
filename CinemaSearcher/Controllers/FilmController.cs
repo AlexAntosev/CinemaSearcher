@@ -66,7 +66,7 @@ namespace CinemaSearcher.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetAllBySearchQuery([FromQuery] FilmSearchModel filmSearchModel)
         {
-            FilmSearchBuilder filmSearchBuilder = new FilmSearchBuilder(filmSearchModel);
+            FilmSearchBuilder filmSearchBuilder = new FilmSearchBuilder(FilmSearchModel.Ensure(filmSearchModel));
             var tickets = await _filmService.Find(filmSearchBuilder.Build());
 
             return Ok(tickets);

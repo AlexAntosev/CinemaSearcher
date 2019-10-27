@@ -1,8 +1,6 @@
 ﻿using CinemaSearcher.Persisted.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace CinemaSearcher.Business.Searching
 {
@@ -37,19 +35,13 @@ namespace CinemaSearcher.Business.Searching
             return this;
         }
 
-        private FilmSearchBuilder AddDurationFilter(int duration)
-        {
-            Filter = PredicateBuilder.And(Filter, film => (duration > 0) ? film.DurationTime == duration : true);
-            return this;
-        }
-
-        private FilmSearchBuilder AddToDurationFilter(float durationTo)
+        private FilmSearchBuilder AddToDurationFilter(float? durationTo)
         {
             Filter = PredicateBuilder.And(Filter, film => (durationTo > 0) ? film.DurationTime < durationTo : true);
             return this;
         }
 
-        private FilmSearchBuilder AddFromDurationFilter(float durationFrom)
+        private FilmSearchBuilder AddFromDurationFilter(float? durationFrom)
         {
             Filter = PredicateBuilder.And(Filter, film => (durationFrom > 0) ? film.DurationTime > durationFrom : true);
             return this;
