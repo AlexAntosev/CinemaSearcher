@@ -9,5 +9,7 @@ namespace CinemaSearcher.Models
         public int DurationTime { get; set; }
 
         public string Filmmaker { get; set; }
+
+        public float Price { get; set; }
     }
 }
