@@ -10,6 +10,7 @@ namespace CinemaSearcher.Persisted.Context
 
         public CinemaContext(DbContextOptions options) : base(options)
         {
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

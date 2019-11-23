@@ -19,7 +19,16 @@ namespace CinemaSearcher.Business.Services
 
         public async Task<Film> AddAsync(Film film)
         {
-            await _unitOfWork.FilmRepository.AddAsync(film);
+            for (int i = 0; i < 1000; i++)
+            {
+                await _unitOfWork.FilmRepository.AddAsync(new Film
+                {
+                    Name = film.Name + i,
+                    DurationTime = film.DurationTime,
+                    Filmmaker = film.Filmmaker,
+                    Price = film.Price
+                });
+            }
             await _unitOfWork.CommitAsync();
 
             return film;

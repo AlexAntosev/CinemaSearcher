@@ -46,7 +46,5 @@ namespace CinemaSearcher.Business.Searching
             Filter = PredicateBuilder.And(Filter, film => (durationFrom > 0) ? film.DurationTime > durationFrom : true);
             return this;
         }
-
-
     }
 }
