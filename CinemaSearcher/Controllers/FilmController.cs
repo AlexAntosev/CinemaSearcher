@@ -68,6 +68,7 @@ namespace CinemaSearcher.Controllers
         {
             FilmSearchBuilder filmSearchBuilder = new FilmSearchBuilder(FilmSearchModel.Ensure(filmSearchModel));
             var tickets = await _filmService.Find(filmSearchBuilder.Build());
+            tickets.Take(filmSearchModel.Count);
 
             return Ok(tickets);
         }
